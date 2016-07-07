@@ -12,7 +12,7 @@ github 提供了 git 版本库相关的一系列服务，我们直接使用它�
 
 
 ## Fork 测验工程
-访问 https://github.com/fushang318/team-teacher-student ，点击右上角的 “Fork”  
+访问 https://github.com/fushang318/privileges-manager ，点击右上角的 “Fork”  
 这样就把测验工程Fork到自己账号下面了  
 
 
@@ -25,12 +25,12 @@ github 提供了 git 版本库相关的一系列服务，我们直接使用它�
 
 ## 迁出测验代码到本地系统
 访问你 fork 的测验工程的 github 主页，点击页面上的绿色按钮 “Clone or download”  
-复制 https 开头的这个地址  `https://github.com/xxx/team-teacher-student.git` ， 运行 `git clone` 命令时会用到这个地址
+复制 https 开头的这个地址  `https://github.com/xxx/privileges-manager.git` ， 运行 `git clone` 命令时会用到这个地址
 
 命令行运行如下命令（使用 windows 的同学需要用安装好的 git bash 进入命令行）  
 ```bash
-git clone https://github.com/xxx/team-teacher-student.git
-cd team-teacher-student
+git clone https://github.com/xxx/privileges-manager.git
+cd privileges-manager
 # 该目录就是你的工程目录了
 # 你可以在该目录下进行开发和提交代码
 # 尽量分多次提交代码，这样可以记录下你的提交记录，这样能够反映出你的开发思维过程，并且如果开发出现问题也可以就近回退代码
@@ -38,14 +38,14 @@ cd team-teacher-student
 
 ## 提交代码
 ```bash
-cd team-teacher-student
+cd privileges-manager
 git add -A
 git commit -m "input your commit message"
 ```
 
 ## push 代码到 github
 ```bash
-cd team-teacher-student
+cd privileges-manager
 git push origin master
 # 输入你的账户名和密码
 # 提交完成后，访问你 fork 的测验工程的 github 主页就会看到你的提交已经 push 到 github 了
