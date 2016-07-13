@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="ylb_privileges"
+  id="myeclipse.1468386199170"
+  context-root="/ylb_privileges"
+  j2ee-spec="6.0"
+  archive="ylb_privileges.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+
