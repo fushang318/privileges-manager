@@ -32,7 +32,19 @@
 		<property name="password" value="${jdbc.connection.password}" />
 	</bean>
 	 
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:SqlMapConfig.xml"/>
+	</bean>
 	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+	
+	<!-- 扫描 basePackage下所有的接口，根据对应的mapper.xml为其生成代理类-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.lesaas.mapper" />
+	</bean>
 	
 	<!-- Hibernate 配置 -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
@@ -111,17 +123,8 @@
 		<property name="transactionAttributes">
 			<props>
 				<prop key="add*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT,-Exception</prop>
-				<prop key="create*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT,-Exception</prop>
-				<prop key="insert*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT,-Exception</prop>
-				<prop key="save*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT,-Exception</prop>
 				<prop key="update*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT,-Exception</prop>
 				<prop key="del*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT,-Exception</prop>
-				<prop key="quit*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT,-Exception</prop>
-				<prop key="transfer*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT,-Exception</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT,-Exception</prop>
-				<prop key="do*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT,-Exception</prop>
-				<prop key="approve*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT,-Exception</prop>
-				<prop key="post*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT,-Exception</prop>
 				<prop key="query*">PROPAGATION_REQUIRED,readOnly</prop>
 				<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
 				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
@@ -147,5 +150,4 @@
 		</property>
 	</bean>
 	
-	 
 </beans>

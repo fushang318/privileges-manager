@@ -14,13 +14,6 @@
 		<param-value>/ylb_privileges</param-value>
 	</context-param>
 	
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>
-			classpath*:application*.xml
-		</param-value>
-	</context-param>
-	
 	<filter>
 		<filter-name>EncodingFilter</filter-name>
 		<filter-class>
@@ -42,54 +35,34 @@
 	</filter-mapping>
 	
 	
-	<filter>
-		<filter-name>Acegi Filter Chain Proxy</filter-name>
-		<filter-class>
-			org.acegisecurity.util.FilterToBeanProxy
-		</filter-class>
+	<!-- Spring MVC Servlet -->
+	<servlet>
+		<servlet-name>Spring-Servlet</servlet-name>
+		<servlet-class> org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
-			<param-name>targetClass</param-name>
+			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				org.acegisecurity.util.FilterChainProxy
+				classpath*:application*.xml
 			</param-value>
 		</init-param>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>Acegi Filter Chain Proxy</filter-name>
-		<url-pattern>*.action</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Acegi Filter Chain Proxy</filter-name>
-		<url-pattern>*.jsp</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Acegi Filter Chain Proxy</filter-name>
-		<url-pattern>/rw/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Acegi Filter Chain Proxy</filter-name>
-		<url-pattern>/j_acegi_security_check</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Acegi Filter Chain Proxy</filter-name>
-		<url-pattern>/j_acegi_logout</url-pattern>
-	</filter-mapping>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Spring-Servlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
 	
-	<filter>
-		<filter-name>hibernateFilter</filter-name>
-		<filter-class>
-			org.springframework.orm.hibernate3.support.OpenSessionInViewFilter
-		</filter-class>
-	</filter>
+	<servlet-mapping>
+		<servlet-name>Spring-Servlet</servlet-name>
+		<url-pattern>*.jsp</url-pattern>
+	</servlet-mapping>
+	
 	
 	<listener>
+  		<listener-class>com.lesaas.listener.StartUpListener</listener-class>
+  	</listener>
+ 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
-	<listener>
-		<listener-class>
-			org.acegisecurity.ui.session.HttpSessionEventPublisher
-		</listener-class>
-	</listener>
 </web-app>
