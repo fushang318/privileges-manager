@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd" default-autowire="byName">
 
 	<!-- 扫描classpath的包下的所有类，该包路径下的类可以不需要配置bean了 -->
-	<context:component-scan base-package="com.lesaas.action" />
+	<context:component-scan base-package="com.lesaas" />
 	
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />
@@ -27,7 +27,7 @@
 	<!-- Resolves view names to protected .jsp resources within the /WEB-INF/views directory -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-		<property name="prefix" value="/view/"/>
+		<property name="prefix" value="/WEB-INF/view/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
 	
