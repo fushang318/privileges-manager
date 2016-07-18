@@ -22,4 +22,9 @@ public class UserService {
 		user.setPassword(password);
 		return userMapper.getUserInfo(user);
 	}
+
+	public User getUserAndRoleById(Integer userId) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserAndRoleById(userId);
+	}
 }

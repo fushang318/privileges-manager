@@ -14,6 +14,8 @@ public class User {
 	private Integer status;
 	private Integer roleId;
 	
+	private Role role;
+	
 	public Integer getUserId() {
 		return userId;
 	}
@@ -55,6 +57,13 @@ public class User {
 	}
 	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
+	}
+	public Role getRole() {
+		// TODO Auto-generated method stub
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 }

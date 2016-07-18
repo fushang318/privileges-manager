@@ -6,6 +6,16 @@
 	default-lazy-init="false">
 	<description>spring 公共配置</description>
 	
+	<bean id="userService" class="com.lesaas.service.UserService">
+		<property name="userMapper" ref="userMapper"/>
+	</bean>
+	<bean id="roleService" class="com.lesaas.service.RoleService">
+		<property name="roleMapper" ref="roleMapper"/>
+	</bean>
+	<bean id="menuService" class="com.lesaas.service.MenuService">
+		<property name="menuMapper" ref="menuMapper"/>
+	</bean>
+	
 	<!-- 定义受环境影响易变的变量 -->
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />

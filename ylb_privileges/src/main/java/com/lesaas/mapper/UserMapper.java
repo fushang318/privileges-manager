@@ -8,4 +8,6 @@ import com.lesaas.model.User;
 public interface UserMapper  {
 	
 	User getUserInfo(User user);
+
+	User getUserAndRoleById(Integer userId);
 }

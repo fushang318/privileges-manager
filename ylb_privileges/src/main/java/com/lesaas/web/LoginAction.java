@@ -1,18 +1,25 @@
 package com.lesaas.web;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lesaas.common.Constants;
+import com.lesaas.common.RightsHelper;
 import com.lesaas.common.Tools;
+import com.lesaas.model.Menu;
+import com.lesaas.model.Role;
 import com.lesaas.model.User;
+import com.lesaas.service.MenuService;
 import com.lesaas.service.UserService;
 
 @Controller
@@ -20,6 +27,8 @@ public class LoginAction {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private MenuService menuService;
 	
 	/**
 	 * 访问登录页
@@ -57,5 +66,39 @@ public class LoginAction {
 			mv.setViewName("login");
 		}
 		return mv;
+	}
+	
+	/**
+	 * 访问系统首页
+	 * @param session
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/index")
+	public String index(HttpSession session,Model model){
+		User user = (User)session.getAttribute(Constants.SESSION_USER);
+		user = userService.getUserAndRoleById(user.getUserId());
+		Role role = user.getRole();
+		String roleRights = role!=null ? role.getRights() : "";
+		String userRights = user.getRights();
+		//避免每次拦截用户操作时查询数据库，以下将用户所属角色权限、用户权限限都存入session
+		session.setAttribute(Constants.SESSION_ROLE_RIGHTS, roleRights); //将角色权限存入session
+		session.setAttribute(Constants.SESSION_USER_RIGHTS, userRights); //将用户权限存入session
+		
+		List<Menu> menuList = menuService.listAllMenu();
+		if(Tools.notEmpty(userRights) || Tools.notEmpty(roleRights)){
+			for(Menu menu : menuList){
+				menu.setHasMenu(RightsHelper.testRights(userRights, menu.getMenuId()) || RightsHelper.testRights(roleRights, menu.getMenuId()));
+				if(menu.isHasMenu()){
+					List<Menu> subMenuList = menu.getSubMenu();
+					for(Menu sub : subMenuList){
+						sub.setHasMenu(RightsHelper.testRights(userRights, sub.getMenuId()) || RightsHelper.testRights(roleRights, sub.getMenuId()));
+					}
+				}
+			}
+		}
+		model.addAttribute("user", user);
+		model.addAttribute("menuList", menuList);
+		return "index";
 	}
 }
