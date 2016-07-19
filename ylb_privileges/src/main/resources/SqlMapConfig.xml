@@ -5,6 +5,7 @@
 <typeAliases></typeAliases>
  <mappers>    
   <mapper resource="com/lesaas/mybatis/UserMapper.xml"/>
+  <mapper resource="com/lesaas/mybatis/MenuMapper.xml"/>
   
  </mappers>
 
