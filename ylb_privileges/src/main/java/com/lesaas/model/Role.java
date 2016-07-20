@@ -22,7 +22,7 @@ public class Role {
 	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
-	@Column(name="role_name")
+	@Column(name="role_name",insertable=false,updatable=false)
 	public String getRoleName() {
 		return roleName;
 	}

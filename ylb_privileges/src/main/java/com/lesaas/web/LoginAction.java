@@ -42,11 +42,9 @@ public class LoginAction {
 	 * 请求登录，验证用户
 	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ModelAndView loginPost(HttpSession session,@RequestParam String loginname,@RequestParam String password,@RequestParam String code){
-		String sessionCode = (String)session.getAttribute(Constants.SESSION_SECURITY_CODE);
+	public ModelAndView loginPost(HttpSession session,@RequestParam String loginname,@RequestParam String password){
 		ModelAndView mv = new ModelAndView();
 		String errInfo = "";
-		if(Tools.notEmpty(sessionCode) && sessionCode.equalsIgnoreCase(code)){
 			User user = userService.getUserByNameAndPwd(loginname, password);
 			if(user!=null){
 				session.setAttribute(Constants.SESSION_USER, user);
@@ -54,11 +52,8 @@ public class LoginAction {
 			}else{
 				errInfo = "用户名或密码有误！";
 			}
-		}else{
-			errInfo = "验证码输入有误！";
-		}
 		if(Tools.isEmpty(errInfo)){
-			mv.setViewName("redirect:index.jsp");
+			mv.setViewName("redirect:index.do");
 		}else{
 			mv.addObject("errInfo", errInfo);
 			mv.addObject("loginname",loginname);

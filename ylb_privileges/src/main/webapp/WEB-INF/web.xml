@@ -8,10 +8,13 @@
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
-  
+  <context-param>
+		<param-name>contextPath</param-name>
+		<param-value>/privileges</param-value>
+	</context-param>
   	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring-*.xml</param-value>
+		<param-value>classpath:spring-Servlet.xml</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -45,7 +48,7 @@
 		<init-param>    
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				classpath:spring-*.xml
+				classpath:spring-mvc.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
@@ -54,12 +57,6 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>spring</servlet-name>
-		<url-pattern>*.jsp</url-pattern>
-	</servlet-mapping>
-	
 	
 	<listener>
   		<listener-class>com.lesaas.listener.StartUpListener</listener-class>
