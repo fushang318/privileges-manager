@@ -1,7 +1,6 @@
 package com.lesaas.service;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +17,13 @@ public class UserService {
 	
 	private UserMapper userMapper;
 	
+	public UserMapper getUserMapper() {
+		return userMapper;
+	}
+
+	public void setUserMapper(UserMapper userMapper) {
+		this.userMapper = userMapper;
+	}
 	public User getUserByNameAndPwd(String username,String password){
 		User user = new User();
 		user.setLoginname(username);
@@ -30,12 +36,6 @@ public class UserService {
 		return userMapper.getUserAndRoleById(userId);
 	}
 
-	public UserMapper getUserMapper() {
-		return userMapper;
-	}
-
-	public void setUserMapper(UserMapper userMapper) {
-		this.userMapper = userMapper;
-	}
+	
 	
 }
