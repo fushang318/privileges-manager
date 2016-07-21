@@ -6,6 +6,7 @@
  <mappers>    
   <mapper resource="com/lesaas/mybatis/UserMapper.xml"/>
   <mapper resource="com/lesaas/mybatis/MenuMapper.xml"/>
+  <mapper resource="com/lesaas/mybatis/RoleMapper.xml"/>
   
  </mappers>
 
