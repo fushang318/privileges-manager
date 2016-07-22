@@ -48,7 +48,6 @@ public class LoginAction {
 			User user = userService.getUserByNameAndPwd(loginname, password);
 			if(user!=null){
 				session.setAttribute(Constants.SESSION_USER, user);
-				session.removeAttribute(Constants.SESSION_SECURITY_CODE);
 			}else{
 				errInfo = "用户名或密码有误！";
 			}
@@ -75,19 +74,17 @@ public class LoginAction {
 		user = userService.getUserAndRoleById(user.getUserId());
 		Role role = user.getRole();
 		String roleRights = role!=null ? role.getRights() : "";
-		String userRights = user.getRights();
-		//避免每次拦截用户操作时查询数据库，以下将用户所属角色权限、用户权限限都存入session
+		//避免每次拦截用户操作时查询数据库，以下将用户所属角色权限存入session
 		session.setAttribute(Constants.SESSION_ROLE_RIGHTS, roleRights); //将角色权限存入session
-		session.setAttribute(Constants.SESSION_USER_RIGHTS, userRights); //将用户权限存入session
 		
 		List<Menu> menuList = menuService.listAllMenu();
-		if(Tools.notEmpty(userRights) || Tools.notEmpty(roleRights)){
+		if(Tools.notEmpty(roleRights)){
 			for(Menu menu : menuList){
-				menu.setHasMenu(RightsHelper.testRights(userRights, menu.getMenuId()) || RightsHelper.testRights(roleRights, menu.getMenuId()));
+				menu.setHasMenu(RightsHelper.testRights(roleRights, menu.getMenuId()));
 				if(menu.isHasMenu()){
 					List<Menu> subMenuList = menu.getSubMenu();
 					for(Menu sub : subMenuList){
-						sub.setHasMenu(RightsHelper.testRights(userRights, sub.getMenuId()) || RightsHelper.testRights(roleRights, sub.getMenuId()));
+						sub.setHasMenu(RightsHelper.testRights(roleRights, sub.getMenuId()));
 					}
 				}
 			}
@@ -95,5 +92,13 @@ public class LoginAction {
 		model.addAttribute("user", user);
 		model.addAttribute("menuList", menuList);
 		return "index";
+	}
+	
+	
+	@RequestMapping(value="/logout")
+	public String logout(HttpSession session){
+		session.removeAttribute(Constants.SESSION_USER);
+		session.removeAttribute(Constants.SESSION_ROLE_RIGHTS);
+		return "login";
 	}
 }

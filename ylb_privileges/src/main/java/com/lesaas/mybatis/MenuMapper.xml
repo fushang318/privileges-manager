@@ -22,4 +22,24 @@
 	<select id="listAllSubMenu" resultMap="menuResultMap">
 		select * from bas_menu where parent_id is not null
 	</select>
+	
+	<select id="getMenuById" parameterType="int" resultMap="menuResultMap">
+		select * from bas_menu where menu_id=#{menuId}
+	</select>
+	
+	<insert id="insertMenu" parameterType="com.lesaas.model.Menu"  useGeneratedKeys="true" keyProperty="menuId">
+		insert into bas_menu (menu_name,menu_url,parent_id) values (#{menuName},#{menuUrl},#{parentId})
+	</insert>
+	
+	<update id="updateMenu" parameterType="com.lesaas.model.Menu">
+		update bas_menu set 
+		menu_name=#{menuName},
+		menu_url=#{menuUrl},
+		parent_id=#{parentId} 
+		where menu_id=#{menuId}
+	</update>
+	
+	<delete id="deleteMenuById" parameterType="int">
+		delete from bas_menu where menu_id=#{menuId} or parent_id=#{menuId}
+	</delete>
 </mapper>

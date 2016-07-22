@@ -14,7 +14,6 @@ public class User {
 	private String loginname;
 	private String username;
 	private String password;
-	private String rights;
 	private Integer status;
 	private Integer roleId;
 	
@@ -48,13 +47,6 @@ public class User {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
-	}
-	@Column(name="rights")
-	public String getRights() {
-		return rights;
-	}
-	public void setRights(String rights) {
-		this.rights = rights;
 	}
 	@Column(name="login_name")
 	public String getLoginname() {

@@ -12,4 +12,12 @@ public interface MenuMapper {
 	List<Menu> listAllParentMenu();
 
 	List<Menu> listAllSubMenu();
+	
+	Menu getMenuById(Integer menuId);
+	
+	void insertMenu(Menu menu);
+	
+	void updateMenu(Menu menu);
+	
+	void deleteMenuById(Integer menuId);
 }

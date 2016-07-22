@@ -59,9 +59,8 @@ public class RightsHandlerInterceptor extends HandlerInterceptorAdapter{
 		//System.out.println(path+"===="+menuId);
 		if(menuId!=null){
 			//user = ServiceHelper.getUserService().getUserAndRoleById(user.getUserId());
-			String userRights = (String) session.getAttribute(Constants.SESSION_USER_RIGHTS);
 			String roleRights = (String) session.getAttribute(Constants.SESSION_ROLE_RIGHTS);
-			if(RightsHelper.testRights(userRights, menuId) || RightsHelper.testRights(roleRights, menuId)){
+			if(RightsHelper.testRights(roleRights, menuId)){
 				return true;
 			}else{
 				System.out.println("用户："+user.getLoginname()+"试图访问"+path+"被阻止！");

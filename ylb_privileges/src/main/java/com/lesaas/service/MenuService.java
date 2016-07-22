@@ -34,11 +34,11 @@ public class MenuService {
 			return menus;
 	}
 
-	private List<Menu> listSubMenuByParentId(Integer parentId) {
+	public List<Menu> listSubMenuByParentId(Integer parentId) {
 			return menuMapper.listSubMenuByParentId(parentId);
 	}
 
-	private List<Menu> listAllParentMenu() {
+	public List<Menu> listAllParentMenu() {
 		return menuMapper.listAllParentMenu();
 	}
 
@@ -46,4 +46,19 @@ public class MenuService {
 		return menuMapper.listAllSubMenu();
 	}
 	
+	public void deleteMenuById(Integer menuId) {
+		menuMapper.deleteMenuById(menuId);
+	}
+
+	public Menu getMenuById(Integer menuId) {
+		return menuMapper.getMenuById(menuId);
+	}
+	
+	public void saveMenu(Menu menu) {
+		if(menu.getMenuId()!=null && menu.getMenuId().intValue()>0){
+			menuMapper.updateMenu(menu);
+		}else{
+			menuMapper.insertMenu(menu);
+		}
+	}
 }

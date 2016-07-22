@@ -32,7 +32,7 @@
 					&nbsp;<span id="nameerr" class="errInfo"></span>
 				</div>
 				<div class="login_info">
-					<label>密　码：</label><input type="password" name="password" id="password" class="login_input" value="admin"/>
+					<label>密　码：</label><input type="password" name="password" id="password" class="login_input" value="1"/>
 					&nbsp;<span id="pwderr" class="errInfo"></span>
 				</div>
 				<div class="login_info">

@@ -1,6 +1,8 @@
 package com.lesaas.service;
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +38,33 @@ public class UserService {
 		return userMapper.getUserAndRoleById(userId);
 	}
 
-	
+	public List<User> listPageUser(User user) {
+		// TODO Auto-generated method stub
+		return userMapper.listPageUser(user);
+	}
+
+	public boolean insertUser(User user) {
+		int count = userMapper.getCountByName(user.getLoginname());
+		if(count>0){
+			return false;
+		}else{
+			userMapper.insertUser(user);
+			return true;
+		}
+	}
+
+	public void updateUserBaseInfo(User user) {
+		 userMapper.updateUserBaseInfo(user);
+	}
+
+	public User getUserById(int userId) {
+		return userMapper.getUserById(userId);
+	}
+
+	public void deleteUser(int userId) {
+		userMapper.deleteUser(userId);
+	}
+
+
 	
 }

@@ -29,7 +29,7 @@ public class Role {
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
-	@Column(name="role_name")
+	@Column(name="rights")
 	public String getRights() {
 		return rights;
 	}

@@ -6,7 +6,7 @@
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
   <display-name>ylb_privileges</display-name>	
   <welcome-file-list>
-    <welcome-file>login.jsp</welcome-file>
+    <welcome-file>views/login.jsp</welcome-file>
   </welcome-file-list>
   <context-param>
 		<param-name>contextPath</param-name>
