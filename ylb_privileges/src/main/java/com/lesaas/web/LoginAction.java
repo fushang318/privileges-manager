@@ -17,7 +17,6 @@ import com.lesaas.common.Constants;
 import com.lesaas.common.RightsHelper;
 import com.lesaas.common.Tools;
 import com.lesaas.model.Menu;
-import com.lesaas.model.Role;
 import com.lesaas.model.User;
 import com.lesaas.service.MenuService;
 import com.lesaas.service.UserService;
