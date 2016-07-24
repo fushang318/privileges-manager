@@ -29,7 +29,7 @@
 				<td>${vs.index+1}</td>
 				<td>${user.loginname }</td>
 				<td>${user.username }</td>
-				<td>${user.role.roleName }</td>
+				<td>${user.rolename }</td>
 				<td><a href="javascript:editUser(${user.userId });">修改</a> | <a href="javascript:delUser(${user.userId });">删除</a></td>
 				</tr>
 				</c:forEach>

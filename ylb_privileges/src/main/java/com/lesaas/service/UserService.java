@@ -2,11 +2,12 @@ package com.lesaas.service;
 
 
 import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lesaas.dao.UserDao;
 import com.lesaas.mapper.UserMapper;
 import com.lesaas.model.User;
 
@@ -18,6 +19,8 @@ import com.lesaas.model.User;
 public class UserService {
 	
 	private UserMapper userMapper;
+	@Autowired
+	private UserDao userDao;
 	
 	public UserMapper getUserMapper() {
 		return userMapper;
@@ -30,39 +33,38 @@ public class UserService {
 		User user = new User();
 		user.setLoginname(username);
 		user.setPassword(password);
-		return userMapper.getUserInfo(user);
+		return userDao.getUserInfo(user);
 	}
 
-	public User getUserAndRoleById(Integer userId) {
-		// TODO Auto-generated method stub
-		return userMapper.getUserAndRoleById(userId);
+	public List<Object[]> getUserAndRoleById(Integer userId) {
+		return userDao.getUserAndRoleById(userId);
 	}
 
 	public List<User> listPageUser(User user) {
-		// TODO Auto-generated method stub
-		return userMapper.listPageUser(user);
+		return userDao.listPageUser(user);
 	}
 
 	public boolean insertUser(User user) {
-		int count = userMapper.getCountByName(user.getLoginname());
+		int count = userDao.getCountByName(user.getLoginname());
 		if(count>0){
 			return false;
 		}else{
-			userMapper.insertUser(user);
+			user.setStatus(0);
+			userDao.insertUser(user);
 			return true;
 		}
 	}
 
 	public void updateUserBaseInfo(User user) {
-		 userMapper.updateUserBaseInfo(user);
+		userDao.updateUserBaseInfo(user);
 	}
 
 	public User getUserById(int userId) {
-		return userMapper.getUserById(userId);
+		return userDao.getUserById(userId);
 	}
 
 	public void deleteUser(int userId) {
-		userMapper.deleteUser(userId);
+		userDao.deleteUser(userId);
 	}
 
 

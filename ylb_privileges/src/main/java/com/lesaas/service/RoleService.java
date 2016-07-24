@@ -2,10 +2,12 @@ package com.lesaas.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lesaas.dao.RoleDao;
 import com.lesaas.mapper.RoleMapper;
 import com.lesaas.model.Role;
 
@@ -15,6 +17,8 @@ import com.lesaas.model.Role;
 @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)//所有方法不加事物
 public class RoleService {
 	private RoleMapper roleMapper;
+	@Autowired
+	private RoleDao roleDao;
 
 	public RoleMapper getRoleMapper() {
 		return roleMapper;
@@ -25,37 +29,37 @@ public class RoleService {
 	}
 
 	public List<Role> listAllRoles() {
-		return roleMapper.listAllRoles();
+		return roleDao.listAllRoles();
 	}
 	
 	public void deleteRoleById(int roleId) {
-		roleMapper.deleteRoleById(roleId);
+		roleDao.deleteRoleById(roleId);
 	}
 
 	public Role getRoleById(int roleId) {
-		return roleMapper.getRoleById(roleId);
+		return roleDao.getRoleById(roleId);
 	}
 
 	public boolean insertRole(Role role) {
-		if(roleMapper.getCountByName(role)>0)
+		if(roleDao.getCountByName(role)>0)
 			return false;
 		else{
-			roleMapper.insertRole(role);
+			roleDao.insertRole(role);
 			return true;
 		}
 	}
 
 	public boolean updateRoleBaseInfo(Role role) {
-		if(roleMapper.getCountByName(role)>0)
+		if(roleDao.getCountByName(role)>0)
 			return false;
 		else{
-			roleMapper.updateRoleBaseInfo(role);
+			roleDao.updateRoleBaseInfo(role);
 			return true;
 		}
 	}
 	
 	public void updateRoleRights(Role role) {
-		roleMapper.updateRoleRights(role);
+		roleDao.updateRoleRights(role);
 	}
 
 	

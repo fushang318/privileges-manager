@@ -71,9 +71,9 @@ public class LoginAction {
 	@RequestMapping(value="/index")
 	public String index(HttpSession session,Model model){
 		User user = (User)session.getAttribute(Constants.SESSION_USER);
-		user = userService.getUserAndRoleById(user.getUserId());
-		Role role = user.getRole();
-		String roleRights = role!=null ? role.getRights() : "";
+		List<Object[]> user1 = userService.getUserAndRoleById(user.getUserId());
+		//Role role = user.getRole();
+		String roleRights = user1!=null ? user1.get(0)[4].toString() : "";
 		//避免每次拦截用户操作时查询数据库，以下将用户所属角色权限存入session
 		session.setAttribute(Constants.SESSION_ROLE_RIGHTS, roleRights); //将角色权限存入session
 		
@@ -89,7 +89,7 @@ public class LoginAction {
 				}
 			}
 		}
-		model.addAttribute("user", user);
+		model.addAttribute("user", user1.get(0));
 		model.addAttribute("menuList", menuList);
 		return "index";
 	}

@@ -91,12 +91,6 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="hibernateLazyResolver"
-		class="com.letech.core.hibernate.HibernateLazyResolver">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean> 
 	<!-- Spring JDBCTemplate配置 -->
 	<bean id="jdbcTemplate"
 		class="org.springframework.jdbc.core.JdbcTemplate">

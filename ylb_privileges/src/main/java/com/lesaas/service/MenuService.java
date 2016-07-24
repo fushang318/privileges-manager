@@ -2,10 +2,12 @@ package com.lesaas.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lesaas.dao.MenuDao;
 import com.lesaas.mapper.MenuMapper;
 import com.lesaas.model.Menu;
 
@@ -14,7 +16,8 @@ import com.lesaas.model.Menu;
 @Service
 @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)//所有方法不加事物
 public class MenuService {
-	
+	@Autowired
+	private MenuDao menuDao;
 	private MenuMapper menuMapper;
 
 	public MenuMapper getMenuMapper() {
@@ -35,30 +38,30 @@ public class MenuService {
 	}
 
 	public List<Menu> listSubMenuByParentId(Integer parentId) {
-			return menuMapper.listSubMenuByParentId(parentId);
+			return menuDao.listSubMenuByParentId(parentId);
 	}
 
 	public List<Menu> listAllParentMenu() {
-		return menuMapper.listAllParentMenu();
+		return menuDao.listAllParentMenu();
 	}
 
 	public List<Menu> listAllSubMenu() {
-		return menuMapper.listAllSubMenu();
+		return menuDao.listAllSubMenu();
 	}
 	
 	public void deleteMenuById(Integer menuId) {
-		menuMapper.deleteMenuById(menuId);
+		menuDao.deleteMenuById(menuId);
 	}
 
 	public Menu getMenuById(Integer menuId) {
-		return menuMapper.getMenuById(menuId);
+		return menuDao.getMenuById(menuId);
 	}
 	
 	public void saveMenu(Menu menu) {
 		if(menu.getMenuId()!=null && menu.getMenuId().intValue()>0){
-			menuMapper.updateMenu(menu);
+			menuDao.updateMenu(menu);
 		}else{
-			menuMapper.insertMenu(menu);
+			menuDao.insertMenu(menu);
 		}
 	}
 }

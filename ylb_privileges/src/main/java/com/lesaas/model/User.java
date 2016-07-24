@@ -16,7 +16,7 @@ public class User {
 	private String password;
 	private Integer status;
 	private Integer roleId;
-	
+	private String rolename;
 	private Role role;
 	@Id
 	@GeneratedValue
@@ -27,7 +27,7 @@ public class User {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-	@Column(name="user_name")
+	@Column(name="username")
 	public String getUsername() {
 		return username;
 	}
@@ -48,7 +48,7 @@ public class User {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	@Column(name="login_name")
+	@Column(name="loginname")
 	public String getLoginname() {
 		return loginname;
 	}
@@ -61,6 +61,13 @@ public class User {
 	}
 	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
+	}
+	@Transient
+	public String getRolename() {
+		return rolename;
+	}
+	public void setRolename(String rolename) {
+		this.rolename = rolename;
 	}
 	@Transient
 	public Role getRole() {
