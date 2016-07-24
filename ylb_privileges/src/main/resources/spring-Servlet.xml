@@ -6,15 +6,7 @@
 	default-lazy-init="false">
 	<description>spring 公共配置</description>
 	
-	<bean id="userService" class="com.lesaas.service.UserService">
-		<property name="userMapper" ref="userMapper"/>
-	</bean>
-	<bean id="roleService" class="com.lesaas.service.RoleService">
-		<property name="roleMapper" ref="roleMapper"/>
-	</bean>
-	<bean id="menuService" class="com.lesaas.service.MenuService">
-		<property name="menuMapper" ref="menuMapper"/>
-	</bean>
+	
 	
 	<!-- 定义受环境影响易变的变量 -->
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -42,19 +34,6 @@
 		<property name="password" value="${jdbc.connection.password}" />
 	</bean>
 	 
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"/>
-		<property name="configLocation" value="classpath:SqlMapConfig.xml"/>
-	</bean>
-	
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
-	</bean>
-	
-	<!-- 扫描 basePackage下所有的接口，根据对应的mapper.xml为其生成代理类-->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.lesaas.mapper" />
-	</bean>
 	
 	<!-- Hibernate 配置 -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">

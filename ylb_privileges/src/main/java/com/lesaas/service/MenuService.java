@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lesaas.dao.MenuDao;
-import com.lesaas.mapper.MenuMapper;
 import com.lesaas.model.Menu;
 
 
@@ -18,15 +17,7 @@ import com.lesaas.model.Menu;
 public class MenuService {
 	@Autowired
 	private MenuDao menuDao;
-	private MenuMapper menuMapper;
 
-	public MenuMapper getMenuMapper() {
-		return menuMapper;
-	}
-
-	public void setMenuMapper(MenuMapper menuMapper) {
-		this.menuMapper = menuMapper;
-	}
 
 	public List<Menu> listAllMenu() {
 			List<Menu> menus = this.listAllParentMenu();

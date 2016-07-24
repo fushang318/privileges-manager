@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lesaas.dao.UserDao;
-import com.lesaas.mapper.UserMapper;
 import com.lesaas.model.User;
 
 
@@ -18,17 +17,9 @@ import com.lesaas.model.User;
 @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)//所有方法不加事物
 public class UserService {
 	
-	private UserMapper userMapper;
 	@Autowired
 	private UserDao userDao;
 	
-	public UserMapper getUserMapper() {
-		return userMapper;
-	}
-
-	public void setUserMapper(UserMapper userMapper) {
-		this.userMapper = userMapper;
-	}
 	public User getUserByNameAndPwd(String username,String password){
 		User user = new User();
 		user.setLoginname(username);

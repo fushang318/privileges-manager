@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lesaas.dao.RoleDao;
-import com.lesaas.mapper.RoleMapper;
 import com.lesaas.model.Role;
 
 
@@ -16,17 +15,9 @@ import com.lesaas.model.Role;
 @Service
 @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)//所有方法不加事物
 public class RoleService {
-	private RoleMapper roleMapper;
 	@Autowired
 	private RoleDao roleDao;
 
-	public RoleMapper getRoleMapper() {
-		return roleMapper;
-	}
-
-	public void setRoleMapper(RoleMapper roleMapper) {
-		this.roleMapper = roleMapper;
-	}
 
 	public List<Role> listAllRoles() {
 		return roleDao.listAllRoles();
